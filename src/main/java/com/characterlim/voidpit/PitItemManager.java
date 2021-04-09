@@ -28,7 +28,7 @@ public class PitItemManager {
 
     public void addItem(Player player) {
         items.add(getItem(player));
-        if(items.contains(getItem(player).toString().toLowerCase()) {
+        if(items.contains(getItem(player).toString().toLowerCase())) {
             player.sendMessage("§9" + getItem(player).toString().toLowerCase() + " §bis already a part of the accepted items list!");
             return;
         }

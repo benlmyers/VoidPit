@@ -28,6 +28,10 @@ public class PitItemManager {
 
     public void addItem(Player player) {
         items.add(getItem(player));
+        if(items.contains(getItem(player).toString().toLowerCase()) {
+            player.sendMessage("§9" + getItem(player).toString().toLowerCase() + " §bis already a part of the accepted items list!");
+            return;
+        }
         player.sendMessage("§9" + getItem(player).toString().toLowerCase() + " §badded to Void Pit accepted items list.");
         updateConfig();
     }

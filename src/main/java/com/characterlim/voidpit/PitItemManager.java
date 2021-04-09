@@ -9,33 +9,38 @@ import java.util.List;
 public class PitItemManager {
 
     private final VoidPitPlugin plugin;
-    private final List<Material> items;
+    private final List<Material> items = new ArrayList<>();
 
     public PitItemManager(VoidPitPlugin instance) {
         this.plugin = instance;
-        List<Material> configItems = (List<Material>) plugin.getConfig().get("accepted-items");
-        if(configItems == null) this.items = new ArrayList<>();
-        else this.items = configItems;
+        List<String> itemStrings = (List<String>) plugin.getConfig().getList("accepted-items");
+        if(itemStrings != null) {
+            for(String itemString: itemStrings) items.add(Material.getMaterial(itemString));
+        }
     }
 
     public void setItem(Player player) {
         items.clear();
         items.add(getItem(player));
+        player.sendMessage("§bVoid Pit accepted item set to §9" + getItem(player).toString());
         updateConfig();
     }
 
     public void addItem(Player player) {
         items.add(getItem(player));
+        player.sendMessage("§9" + getItem(player).toString() + " §badded to Void Pit accepted items list.");
         updateConfig();
     }
 
     public void removeItem(Player player) {
         items.remove(getItem(player));
+        player.sendMessage("§9" + getItem(player).toString() + " §bremoved from Void Pit accepted items list.");
         updateConfig();
     }
 
-    public void resetItems() {
+    public void resetItems(Player player) {
         items.clear();
+        player.sendMessage("§bVoid Pit accepted items have been reset.");
         updateConfig();
     }
 
@@ -47,7 +52,7 @@ public class PitItemManager {
         for(Material material : items) {
             message.append("§9").append(material.toString().toLowerCase()).append("§b, ");
         }
-        message = new StringBuilder(message.substring(message.length() - 2));
+        message.setLength(message.length() - 2);
         player.sendMessage(message.toString());
     }
 
@@ -56,7 +61,9 @@ public class PitItemManager {
     }
 
     private void updateConfig() {
-        plugin.getConfig().addDefault("accepted-items", items);
+        List<String> itemStrings = new ArrayList<String>();
+        for(Material item : items) itemStrings.add(item.toString());
+        plugin.getConfig().addDefault("accepted-items", itemStrings);
         plugin.saveConfig();
     }
 }

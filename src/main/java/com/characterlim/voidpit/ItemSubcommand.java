@@ -35,10 +35,11 @@ public class ItemSubcommand implements Subcommand {
                     itemManager.removeItem(player);
                     break;
                 case "reset":
-                    itemManager.resetItems();
+                    itemManager.resetItems(player);
                     break;
                 case "list":
                     itemManager.listItems(player);
+                    break;
                 case "help":
                     assert player != null;
                     player.sendMessage("§e/pit item set§b: Set the item that the Void Pit consumes to the item in your main hand");

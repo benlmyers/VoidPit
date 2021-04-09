@@ -6,10 +6,12 @@ public class VoidPitPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        getLogger().info("onEnable is called!");
+        this.getLogger().info("=-=-=-=-= Void Hole =-=-=-=-=");
+        this.getLogger().info("Created for Characterlim Ages");
+        this.getLogger().info("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
     }
     @Override
     public void onDisable() {
-        getLogger().info("onDisable is called!");
+        this.getLogger().info("Disabling Void Hole...");
     }
 }

@@ -6,6 +6,5 @@ description: Toss items into the Void Pit to reach a community goal!
 commands:
   pit:
     description: The command for all things related to the Void Pit
-    usage: /pit
     permission: voidpit.pit
     permission-message: You don't have permission to use this command!

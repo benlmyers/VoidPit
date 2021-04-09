@@ -25,8 +25,11 @@ public class PitCommand implements TabExecutor {
         if(args.length == 0) {
             player.sendMessage("§cImproper use of command. Use §e/pit help §cfor more information.");
         } else {
+
             switch(args[0]) {
                 case "item":
+                    break;
+                case "region":
                     break;
                 case "help":
                     player.sendMessage("§e/pit item§b: Configure the item that the Void Pit consumes");
@@ -46,9 +49,20 @@ public class PitCommand implements TabExecutor {
 
             commands.add("item");
             commands.add("help");
+            commands.add("region");
 
             StringUtil.copyPartialMatches(args[0], commands, completions);
             return completions;
+        } else if(args.length == 2) {
+            List<String> completions = new ArrayList<>();
+            List<String> commands = new ArrayList<>();
+
+            switch(args[0]) {
+                case "item":
+                    break;
+                case "region":
+                    break;
+            }
         }
         return null;
     }

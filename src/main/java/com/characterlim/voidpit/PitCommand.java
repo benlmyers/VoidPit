@@ -9,12 +9,14 @@ import org.bukkit.util.StringUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PitCommand implements TabExecutor {
+public class PitCommand extends Supercommand implements TabExecutor {
 
     private final VoidPitPlugin plugin;
+    private final ItemSubcommand itemSubcommand;
 
     public PitCommand(VoidPitPlugin instance) {
         this.plugin = instance;
+        this.itemSubcommand = new ItemSubcommand(instance);
     }
 
     @Override
@@ -28,8 +30,10 @@ public class PitCommand implements TabExecutor {
 
             switch(args[0]) {
                 case "item":
+                    executeSubcommand(commandSender, args, itemSubcommand);
                     break;
                 case "region":
+                    player.sendMessage("§cThis doesn't exist yet!");
                     break;
                 case "help":
                     player.sendMessage("§e/pit item§b: Configure the item that the Void Pit consumes");

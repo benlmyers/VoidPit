@@ -58,12 +58,9 @@ public class PitCommand extends Supercommand implements TabExecutor {
             StringUtil.copyPartialMatches(args[0], commands, completions);
             return completions;
         } else if(args.length == 2) {
-            List<String> completions = new ArrayList<>();
-            List<String> commands = new ArrayList<>();
-
             switch(args[0]) {
                 case "item":
-                    break;
+                    return itemSubcommand.completions(args[1]);
                 case "region":
                     break;
             }

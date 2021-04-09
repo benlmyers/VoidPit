@@ -22,19 +22,19 @@ public class PitItemManager {
     public void setItem(Player player) {
         items.clear();
         items.add(getItem(player));
-        player.sendMessage("§bVoid Pit accepted item set to §9" + getItem(player).toString());
+        player.sendMessage("§bVoid Pit accepted item set to §9" + getItem(player).toString().toLowerCase());
         updateConfig();
     }
 
     public void addItem(Player player) {
         items.add(getItem(player));
-        player.sendMessage("§9" + getItem(player).toString() + " §badded to Void Pit accepted items list.");
+        player.sendMessage("§9" + getItem(player).toString().toLowerCase() + " §badded to Void Pit accepted items list.");
         updateConfig();
     }
 
     public void removeItem(Player player) {
         items.remove(getItem(player));
-        player.sendMessage("§9" + getItem(player).toString() + " §bremoved from Void Pit accepted items list.");
+        player.sendMessage("§9" + getItem(player).toString().toLowerCase() + " §bremoved from Void Pit accepted items list.");
         updateConfig();
     }
 
@@ -48,7 +48,7 @@ public class PitItemManager {
         if(items.size() == 0) {
             player.sendMessage("§bYour pit does not accept any items. Use §e/pit item add §bto add new items.");
         }
-        StringBuilder message = new StringBuilder("§bVoid Pit accepted items: ");
+        StringBuilder message = new StringBuilder("§bVoid Pit accepted items (" + items.size() + "): ");
         for(Material material : items) {
             message.append("§9").append(material.toString().toLowerCase()).append("§b, ");
         }

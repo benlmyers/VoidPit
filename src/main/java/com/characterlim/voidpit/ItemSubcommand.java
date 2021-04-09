@@ -51,7 +51,7 @@ public class ItemSubcommand implements Subcommand {
                     break;
             }
         }
-        return false;
+        return true;
     }
 
     @Override

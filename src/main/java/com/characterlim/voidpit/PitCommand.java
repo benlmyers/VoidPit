@@ -13,10 +13,12 @@ public class PitCommand extends Supercommand implements TabExecutor {
 
     private final VoidPitPlugin plugin;
     private final ItemSubcommand itemSubcommand;
+    private final RegionSubcommand regionSubcommand;
 
     public PitCommand(VoidPitPlugin instance) {
         this.plugin = instance;
         this.itemSubcommand = new ItemSubcommand(instance);
+        this.regionSubcommand = new RegionSubcommand(instance);
     }
 
     @Override
@@ -33,7 +35,7 @@ public class PitCommand extends Supercommand implements TabExecutor {
                     executeSubcommand(commandSender, args, itemSubcommand);
                     break;
                 case "region":
-                    player.sendMessage("§cThis doesn't exist yet!");
+                    executeSubcommand(commandSender, args, regionSubcommand);
                     break;
                 case "help":
                     player.sendMessage("§e/pit item§b: Configure the item that the Void Pit consumes");

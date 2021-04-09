@@ -22,7 +22,7 @@ public class RegionSubcommand implements Subcommand {
 
         if(args.length == 0) {
             assert player != null;
-            player.sendMessage("§cImproper use of command. Use §e/pit item help §cfor more information.");
+            player.sendMessage("§cImproper use of command. Use §e/pit region help §cfor more information.");
         } else {
             switch(args[0]) {
                 case "set":

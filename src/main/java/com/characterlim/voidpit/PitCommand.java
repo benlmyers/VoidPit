@@ -64,6 +64,8 @@ public class PitCommand extends Supercommand implements TabExecutor {
                 case "item":
                     return itemSubcommand.completions(args[1]);
                 case "region":
+                    return regionSubcommand.completions(args[1]);
+                case "region":
                     break;
             }
         }

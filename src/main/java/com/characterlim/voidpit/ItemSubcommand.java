@@ -2,17 +2,17 @@ package com.characterlim.voidpit;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.util.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ItemSubcommand implements Subcommand {
 
-    private VoidPitPlugin plugin;
-    private PitItemManager itemManager = new PitItemManager();
+    private final PitItemManager itemManager;
 
     public ItemSubcommand(VoidPitPlugin instance) {
-        this.plugin = instance;
+        this.itemManager = new PitItemManager(instance);
     }
 
     @Override
@@ -21,12 +21,26 @@ public class ItemSubcommand implements Subcommand {
         if(commandSender instanceof Player) player = (Player) commandSender;
 
         if(args.length == 0) {
+            assert player != null;
             player.sendMessage("§cImproper use of command. Use §e/pit item help §cfor more information.");
         } else {
             switch(args[0]) {
                 case "set":
+                    itemManager.setItem(player);
                     break;
+                case "add":
+                    itemManager.addItem(player);
+                    break;
+                case "remove":
+                    itemManager.removeItem(player);
+                    break;
+                case "reset":
+                    itemManager.resetItems();
+                    break;
+                case "list":
+                    itemManager.listItems(player);
                 case "help":
+                    assert player != null;
                     player.sendMessage("§e/pit item set§b: Set the item that the Void Pit consumes to the item in your main hand");
                     player.sendMessage("§e/pit item add§b: Add the item in your main hand to the list of items that the Void Pit consumes");
                     player.sendMessage("§e/pit item remove§b: Remove the item in your main hand from the list of items that the Void Pit consumes");
@@ -50,6 +64,8 @@ public class ItemSubcommand implements Subcommand {
         commands.add("reset");
         commands.add("list");
         commands.add("help");
-        return null;
+
+        StringUtil.copyPartialMatches(arg, commands, completions);
+        return completions;
     }
 }

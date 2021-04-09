@@ -60,6 +60,10 @@ public class PitItemManager {
         player.sendMessage(message.toString());
     }
 
+    public List<Material> getItems() {
+        return this.items;
+    }
+
     private Material getItem(Player player) {
         return player.getInventory().getItemInMainHand().getType();
     }

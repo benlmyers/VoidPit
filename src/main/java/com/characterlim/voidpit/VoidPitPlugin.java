@@ -7,6 +7,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class VoidPitPlugin extends JavaPlugin {
 
     private FileConfiguration config = getConfig();
+    private DropListener dropListener = new DropListener(this);
 
     @Override
     public void onEnable() {
@@ -19,6 +20,8 @@ public class VoidPitPlugin extends JavaPlugin {
         TabExecutor tabExecutor = new PitCommand(this);
         this.getCommand("pit").setExecutor(tabExecutor);
         this.getCommand("pit").setTabCompleter(tabExecutor);
+
+        getServer().getPluginManager().registerEvents(dropListener, this);
     }
 
     @Override

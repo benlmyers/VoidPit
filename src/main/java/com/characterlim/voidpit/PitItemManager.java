@@ -3,6 +3,7 @@ package com.characterlim.voidpit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PitItemManager {
@@ -12,7 +13,9 @@ public class PitItemManager {
 
     public PitItemManager(VoidPitPlugin instance) {
         this.plugin = instance;
-        this.items = (List<Material>) plugin.getConfig().get("accepted-items");
+        List<Material> configItems = (List<Material>) plugin.getConfig().get("accepted-items");
+        if(configItems == null) this.items = new ArrayList<>();
+        else this.items = configItems;
     }
 
     public void setItem(Player player) {
@@ -37,6 +40,9 @@ public class PitItemManager {
     }
 
     public void listItems(Player player) {
+        if(items.size() == 0) {
+            player.sendMessage("§bYour pit does not accept any items. Use §e/pit item add §bto add new items.");
+        }
         StringBuilder message = new StringBuilder("§bVoid Pit accepted items: ");
         for(Material material : items) {
             message.append("§9").append(material.toString().toLowerCase()).append("§b, ");

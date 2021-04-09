@@ -14,5 +14,6 @@ public abstract class Supercommand {
             subargs[i-1] = args[i];
         }
         subcommand.onCommand(commandSender, subargs);
+        return true;
     }
 }

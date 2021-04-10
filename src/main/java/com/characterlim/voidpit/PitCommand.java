@@ -39,8 +39,13 @@ public class PitCommand extends Supercommand implements TabExecutor {
                     break;
                 case "help":
                     player.sendMessage("§e/pit item§b: Configure the item that the Void Pit consumes");
+                    player.sendMessage("§e/pit reload§b: Reload this plugin");
                     player.sendMessage("§e/pit help§b: Get help on this command");
                     break;
+                case "reload":
+                    this.plugin.onEnable();
+                    Config.load();
+                    player.sendMessage("§bPlugin successfully reloaded.");
             }
         }
 

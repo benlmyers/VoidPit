@@ -30,7 +30,7 @@ public class Config {
 
     public static class Item {
 
-        public static List<Material> items;
+        public static List<Material> items = new ArrayList<>();
 
         public static void load() {
             List<String> itemStrings = (List<String>) plugin.getConfig().getList("accepted-items");

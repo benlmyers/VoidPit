@@ -6,11 +6,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class VoidPitPlugin extends JavaPlugin {
 
-    private FileConfiguration config = getConfig();
-    private DropListener dropListener = new DropListener(this);
+    private FileConfiguration config;
+    private DropListener dropListener;
 
     @Override
     public void onEnable() {
+        this.config = getConfig();
+        this.dropListener = new DropListener(this);
+
         this.getLogger().info("=-=-=-=-= Void Hole =-=-=-=-=");
         this.getLogger().info("Created for Characterlim Ages");
         this.getLogger().info("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");

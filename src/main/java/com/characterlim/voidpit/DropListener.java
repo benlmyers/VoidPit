@@ -43,8 +43,8 @@ public class DropListener implements Listener {
             BlockVector3 v1 = BlockVector3.at(l1.getBlockX(), l1.getBlockY(), l1.getBlockZ());
             BlockVector3 v2 = BlockVector3.at(l2.getBlockX(), l2.getBlockY(), l2.getBlockZ());
             this.pitRegion = new CuboidRegion(v1, v2);
+            this.particleAnimator = new ParticleAnimator(l1.getWorld(), plugin);
         }
-        this.particleAnimator = new ParticleAnimator(l1.getWorld(), plugin);
     }
 
     @EventHandler

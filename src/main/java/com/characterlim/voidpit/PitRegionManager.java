@@ -34,7 +34,7 @@ public class PitRegionManager {
             Config.Region.pos1 = new Location(player.getWorld(), (double) v1.getX(), (double) v1.getY(), (double) v1.getZ());
             Config.Region.pos2 = new Location(player.getWorld(), (double) v2.getX(), (double) v2.getY(), (double) v2.getZ());
             player.sendMessage("§bRegion set! Corner 1: §9" + Config.Region.pos1.toString() + "§b | Corner 2: §9" + Config.Region.pos2.toString());
-            updateConfig();
+            Config.Region.save();
         } catch(IncompleteRegionException e) {
             player.sendMessage("§bYou haven't selected a complete region! Ensure a complete selection is selected, then try again.");
         }
@@ -44,11 +44,5 @@ public class PitRegionManager {
         if(Config.Region.pos1 != null && Config.Region.pos2 != null) {
             player.sendMessage("§bCorner 1: §9" + Config.Region.pos1.toString() + "§b | Corner 2: §9" + Config.Region.pos2.toString());
         }
-    }
-
-    private void updateConfig() {
-        plugin.getConfig().addDefault("region-corner1", Config.Region.pos1);
-        plugin.getConfig().addDefault("region-corner2", Config.Region.pos2);
-        plugin.saveConfig();
     }
 }

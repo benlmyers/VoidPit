@@ -18,7 +18,7 @@ public class PitItemManager {
         Config.Item.items.clear();
         Config.Item.items.add(getItem(player));
         player.sendMessage("§bVoid Pit accepted item set to §9" + getItem(player).toString().toLowerCase());
-        updateConfig();
+        Config.Item.save();
     }
 
     public void addItem(Player player) {
@@ -28,19 +28,19 @@ public class PitItemManager {
             return;
         }
         player.sendMessage("§9" + getItem(player).toString().toLowerCase() + " §badded to Void Pit accepted items list.");
-        updateConfig();
+        Config.Item.save();
     }
 
     public void removeItem(Player player) {
         Config.Item.items.remove(getItem(player));
         player.sendMessage("§9" + getItem(player).toString().toLowerCase() + " §bremoved from Void Pit accepted items list.");
-        updateConfig();
+        Config.Item.save();
     }
 
     public void resetItems(Player player) {
         Config.Item.items.clear();
         player.sendMessage("§bVoid Pit accepted items have been reset.");
-        updateConfig();
+        Config.Item.save();
     }
 
     public void listItems(Player player) {
@@ -61,12 +61,5 @@ public class PitItemManager {
 
     private Material getItem(Player player) {
         return player.getInventory().getItemInMainHand().getType();
-    }
-
-    private void updateConfig() {
-        List<String> itemStrings = new ArrayList<String>();
-        for(Material item : Config.Item.items) itemStrings.add(item.toString());
-        plugin.getConfig().addDefault("accepted-items", itemStrings);
-        plugin.saveConfig();
     }
 }

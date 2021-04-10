@@ -37,14 +37,14 @@ public class DropListener implements Listener {
             for(String itemString: itemStrings) acceptedItems.add(Material.getMaterial(itemString));
         }
 
-        Location l1 = instance.getConfig().getLocation("region-corner1");
-        Location l2 = instance.getConfig().getLocation("region-corner2");
+        Location l1 = Config.Region.pos1;
+        Location l2 = Config.Region.pos2;
         if(l1 != null && l2 != null) {
             BlockVector3 v1 = BlockVector3.at(l1.getBlockX(), l1.getBlockY(), l1.getBlockZ());
             BlockVector3 v2 = BlockVector3.at(l2.getBlockX(), l2.getBlockY(), l2.getBlockZ());
             this.pitRegion = new CuboidRegion(v1, v2);
         }
-        this.particleAnimator = new ParticleAnimator(l1.getWorld());
+        this.particleAnimator = new ParticleAnimator(l1.getWorld(), plugin);
     }
 
     @EventHandler
@@ -81,7 +81,7 @@ public class DropListener implements Listener {
             ItemStack stack = event.getItemDrop().getItemStack();
             if(this.pitRegion.contains(dropPosition)) {
                 player.sendMessage("§bYou've sacrificed §9" + stack.getAmount() + "§b items to the Pit!");
-                event.getItemDrop().getWorld().spawnParticle(Particle.SMOKE_LARGE, event.getItemDrop().getLocation(), 200);
+                particleAnimator.animateItemDestroy(dropLocation);
                 event.getItemDrop().remove();
             }
         }

@@ -26,6 +26,7 @@ public class VoidPitPlugin extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        Config.save();
         this.getLogger().info("Disabling Void Hole...");
     }
 

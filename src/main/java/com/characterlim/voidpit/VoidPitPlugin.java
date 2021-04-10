@@ -33,5 +33,7 @@ public class VoidPitPlugin extends JavaPlugin {
         config.addDefault("config-version", "1.0");
         config.options().copyDefaults(true);
         saveConfig();
+        Config.plugin = this;
+        Config.load();
     }
 }

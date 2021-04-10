@@ -35,6 +35,7 @@ public class PitRegionManager {
             Config.Region.pos2 = new Location(player.getWorld(), (double) v2.getX(), (double) v2.getY(), (double) v2.getZ());
             player.sendMessage("§bRegion set! Corner 1: §9" + Config.Region.pos1.toString() + "§b | Corner 2: §9" + Config.Region.pos2.toString());
             Config.Region.save();
+            plugin.updateItemsOrRegion();
         } catch(IncompleteRegionException e) {
             player.sendMessage("§bYou haven't selected a complete region! Ensure a complete selection is selected, then try again.");
         }

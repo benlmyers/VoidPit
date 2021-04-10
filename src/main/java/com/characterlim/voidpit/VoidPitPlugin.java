@@ -33,6 +33,10 @@ public class VoidPitPlugin extends JavaPlugin {
         this.getLogger().info("Disabling Void Hole...");
     }
 
+    public void updateItemsOrRegion() {
+        dropListener.fetchItemsAndRegion();
+    }
+
     private void initConfig() {
         config.addDefault("config-version", "1.0");
         config.options().copyDefaults(true);

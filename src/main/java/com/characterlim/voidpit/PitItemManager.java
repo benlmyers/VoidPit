@@ -19,6 +19,7 @@ public class PitItemManager {
         Config.Item.items.add(getItem(player));
         player.sendMessage("§bVoid Pit accepted item set to §9" + getItem(player).toString().toLowerCase());
         Config.Item.save();
+        plugin.updateItemsOrRegion();
     }
 
     public void addItem(Player player) {
@@ -29,18 +30,21 @@ public class PitItemManager {
         }
         player.sendMessage("§9" + getItem(player).toString().toLowerCase() + " §badded to Void Pit accepted items list.");
         Config.Item.save();
+        plugin.updateItemsOrRegion();
     }
 
     public void removeItem(Player player) {
         Config.Item.items.remove(getItem(player));
         player.sendMessage("§9" + getItem(player).toString().toLowerCase() + " §bremoved from Void Pit accepted items list.");
         Config.Item.save();
+        plugin.updateItemsOrRegion();
     }
 
     public void resetItems(Player player) {
         Config.Item.items.clear();
         player.sendMessage("§bVoid Pit accepted items have been reset.");
         Config.Item.save();
+        plugin.updateItemsOrRegion();
     }
 
     public void listItems(Player player) {

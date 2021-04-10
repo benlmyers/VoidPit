@@ -32,19 +32,7 @@ public class DropListener implements Listener {
 
     public DropListener(VoidPitPlugin instance) {
         this.plugin = instance;
-        List<String> itemStrings = (List<String>) plugin.getConfig().getList("accepted-items");
-        if(itemStrings != null) {
-            for(String itemString: itemStrings) acceptedItems.add(Material.getMaterial(itemString));
-        }
-
-        Location l1 = Config.Region.pos1;
-        Location l2 = Config.Region.pos2;
-        if(l1 != null && l2 != null) {
-            BlockVector3 v1 = BlockVector3.at(l1.getBlockX(), l1.getBlockY(), l1.getBlockZ());
-            BlockVector3 v2 = BlockVector3.at(l2.getBlockX(), l2.getBlockY(), l2.getBlockZ());
-            this.pitRegion = new CuboidRegion(v1, v2);
-            this.particleAnimator = new ParticleAnimator(l1.getWorld(), plugin);
-        }
+        fetchItemsAndRegion();
     }
 
     @EventHandler
@@ -59,6 +47,22 @@ public class DropListener implements Listener {
         };
 
         task.runTaskTimer(plugin, CHECK_DELAY, CHECK_PERIOD);
+    }
+
+    public void fetchItemsAndRegion() {
+        List<String> itemStrings = (List<String>) plugin.getConfig().getList("accepted-items");
+        if(itemStrings != null) {
+            for(String itemString: itemStrings) acceptedItems.add(Material.getMaterial(itemString));
+        }
+
+        Location l1 = Config.Region.pos1;
+        Location l2 = Config.Region.pos2;
+        if(l1 != null && l2 != null) {
+            BlockVector3 v1 = BlockVector3.at(l1.getBlockX(), l1.getBlockY(), l1.getBlockZ());
+            BlockVector3 v2 = BlockVector3.at(l2.getBlockX(), l2.getBlockY(), l2.getBlockZ());
+            this.pitRegion = new CuboidRegion(v1, v2);
+            this.particleAnimator = new ParticleAnimator(l1.getWorld(), plugin);
+        }
     }
 
     private int checkDrop(PlayerDropItemEvent event, BukkitRunnable task, int count) {

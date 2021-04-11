@@ -3,6 +3,7 @@ package com.characterlim.voidpit.commands;
 import com.characterlim.voidpit.Config;
 import com.characterlim.voidpit.Supercommand;
 import com.characterlim.voidpit.VoidPitPlugin;
+import com.characterlim.voidpit.commands.subcommands.HologramSubcommand;
 import com.characterlim.voidpit.commands.subcommands.ItemSubcommand;
 import com.characterlim.voidpit.commands.subcommands.RegionSubcommand;
 import org.bukkit.command.Command;
@@ -19,11 +20,13 @@ public class PitCommand extends Supercommand implements TabExecutor {
     private final VoidPitPlugin plugin;
     private final ItemSubcommand itemSubcommand;
     private final RegionSubcommand regionSubcommand;
+    private final HologramSubcommand hologramSubcommand;
 
     public PitCommand(VoidPitPlugin instance) {
         this.plugin = instance;
         this.itemSubcommand = new ItemSubcommand(instance);
         this.regionSubcommand = new RegionSubcommand(instance);
+        this.hologramSubcommand = new HologramSubcommand(instance);
     }
 
     @Override
@@ -42,6 +45,9 @@ public class PitCommand extends Supercommand implements TabExecutor {
                 case "region":
                     executeSubcommand(commandSender, args, regionSubcommand);
                     break;
+                case "hologram":
+                    executeSubcommand(commandSender, args, hologramSubcommand);
+                    break;
                 case "help":
                     player.sendMessage("§e/pit item§b: Configure the item that the Void Pit consumes");
                     player.sendMessage("§e/pit reload§b: Reload this plugin");
@@ -51,6 +57,7 @@ public class PitCommand extends Supercommand implements TabExecutor {
                     this.plugin.onEnable();
                     Config.load();
                     player.sendMessage("§bPlugin successfully reloaded.");
+                    break;
             }
         }
 
@@ -64,6 +71,7 @@ public class PitCommand extends Supercommand implements TabExecutor {
             List<String> commands = new ArrayList<String>();
 
             commands.add("item");
+            commands.add("hologram");
             commands.add("help");
             commands.add("region");
             commands.add("reload");
@@ -76,6 +84,8 @@ public class PitCommand extends Supercommand implements TabExecutor {
                     return itemSubcommand.completions(args[1]);
                 case "region":
                     return regionSubcommand.completions(args[1]);
+                case "hologram":
+                    return hologramSubcommand.completions(args[1]);
             }
         }
         return null;

@@ -25,7 +25,7 @@ public class ParticleAnimator {
         this.world.spawnParticle(Particle.SMOKE_LARGE, location, ITEM_DESTROY_PARTICLE_COUNT, 0, 1, 0, 0);
     }
 
-    public void animateAscend(Location startLocation) {
+    public void animateAscend(Location startLocation, CompletionHandler handler) {
 
         Location pos = startLocation;
 
@@ -43,14 +43,18 @@ public class ParticleAnimator {
                 Vector spawnPos = new Vector(pos.getX(), pos.getY(), pos.getZ());
                 double offset = height/2 - Math.abs(triggerHeight - pos.getY());
                 spawnPos.add(new Vector(0.3 * offset * sin(tickCount[0] * 0.05), 0, 0.3 * offset * cos(tickCount[0] * 0.05)));
-                Location spawnLoc = new Location(startLocation.getWorld(), spawnPos.getX(), spawnPos.getY(), spawnPos.getZ());
+                Location spawnLoc = new Location(world, spawnPos.getX(), spawnPos.getY(), spawnPos.getZ());
                 world.spawnParticle(Particle.END_ROD, spawnLoc, 1, 0, 0, 0, 0);
                 int dt = 1 + (int)floor(tickCount[0] / 50.0);
                 tickCount[0] += dt;
                 Vector change = new Vector(dr.getX(), dr.getY(), dr.getZ()).multiply(dt);
                 pos.add(change);
                 plugin.getLogger().info("offset = " + offset);
-                if(tickCount[0] >= ASCEND_ANIMATION_TICKS) this.cancel();
+                if(tickCount[0] >= ASCEND_ANIMATION_TICKS) {
+                    world.spawnParticle(Particle.FIREWORKS_SPARK, 1, 0, 0, 0);
+                    handler.onCompletion();
+                    this.cancel();
+                }
             }
         };
 

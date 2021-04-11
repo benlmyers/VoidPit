@@ -1,5 +1,6 @@
 package com.characterlim.voidpit.listeners;
 
+import com.characterlim.voidpit.CompletionHandler;
 import com.characterlim.voidpit.Config;
 import com.characterlim.voidpit.ParticleAnimator;
 import com.characterlim.voidpit.VoidPitPlugin;
@@ -84,9 +85,18 @@ public class DropListener implements Listener {
             if(this.pitRegion.contains(dropPosition)) {
                 player.sendMessage("§bYou've sacrificed §9" + stack.getAmount() + "§b items to the Pit!");
                 particleAnimator.animateItemDestroy(dropLocation);
-                particleAnimator.animateAscend(dropLocation);
+                particleAnimator.animateAscend(dropLocation, new CompletionHandler() {
+                    @Override
+                    public void onCompletion() {
+                        handleParticleFinished();
+                    }
+                });
                 event.getItemDrop().remove();
             }
         }
+    }
+
+    private void handleParticleFinished() {
+        // ...
     }
 }

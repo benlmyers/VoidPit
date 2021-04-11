@@ -3,6 +3,7 @@ name: VoidPit
 version: 0.1
 author: characterlim
 description: Toss items into the Void Pit to reach a community goal!
+depend: [WorldEdit,WorldGuard,HolographicDisplays]
 commands:
   pit:
     description: The command for all things related to the Void Pit

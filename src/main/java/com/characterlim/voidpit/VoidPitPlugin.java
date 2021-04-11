@@ -20,14 +20,13 @@ public class VoidPitPlugin extends JavaPlugin {
         this.getLogger().info("Created for Characterlim Ages");
         this.getLogger().info("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
 
-        initConfig();
-
         TabExecutor tabExecutor = new PitCommand(this);
         this.getCommand("pit").setExecutor(tabExecutor);
         this.getCommand("pit").setTabCompleter(tabExecutor);
 
         getServer().getPluginManager().registerEvents(dropListener, this);
 
+        Config.plugin = this;
         Config.load();
     }
 
@@ -39,12 +38,5 @@ public class VoidPitPlugin extends JavaPlugin {
 
     public void updateItemsOrRegion() {
         dropListener.fetchItemsAndRegion();
-    }
-
-    private void initConfig() {
-        config.addDefault("config-version", "1.0");
-        config.options().copyDefaults(true);
-        saveConfig();
-        Config.plugin = this;
     }
 }

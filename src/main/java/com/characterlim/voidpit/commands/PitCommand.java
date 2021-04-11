@@ -54,12 +54,10 @@ public class PitCommand extends Supercommand implements TabExecutor {
                     player.sendMessage("§e/pit help§b: Get help on this command");
                     break;
                 case "reload":
+                    this.plugin.onDisable();
                     this.plugin.onEnable();
-                    Config.load();
                     player.sendMessage("§bPlugin successfully reloaded.");
                     break;
-                case "save":
-                    Config.save();
             }
         }
 

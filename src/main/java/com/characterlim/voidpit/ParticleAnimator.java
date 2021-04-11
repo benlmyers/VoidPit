@@ -1,10 +1,13 @@
 package com.characterlim.voidpit;
 
+import org.apache.commons.lang.SerializationUtils;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.World;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
+
+import java.util.List;
 
 public class ParticleAnimator {
 
@@ -13,7 +16,7 @@ public class ParticleAnimator {
     private static final int ITEM_DESTROY_PARTICLE_COUNT = 25;
     private static final int TPS = 20;
     private static final int ASCEND_ANIMATION_TICKS = TPS * 3;
-    private BukkitRunnable task = null;
+    //private List<BukkitRunnable> tasks = null;
 
     public ParticleAnimator(World world, VoidPitPlugin instance) {
         this.world = world;
@@ -27,21 +30,23 @@ public class ParticleAnimator {
     public void animateAscend(Location startLocation) {
 
         Location pos = startLocation;
-        Location endLocation = Config.Hologram.pos;
+        Location endLocation = new Location(Config.Hologram.pos.getWorld(), Config.Hologram.pos.getX(), Config.Hologram.pos.getY(), Config.Hologram.pos.getZ());
 
         Vector dr = endLocation.subtract(startLocation).toVector().multiply(0.01 /*1.0 / ASCEND_ANIMATION_TICKS*/);
         final int[] tickCount = {0};
 
-        task = new BukkitRunnable() {
+        BukkitRunnable task = new BukkitRunnable() {
             @Override
             public void run() {
                 world.spawnParticle(Particle.END_ROD, pos, 1, 0, 0, 0, 0);
                 Vector dPos = dr;
                 pos.add(dPos);
                 tickCount[0] += 1;
-                if(tickCount[0] >= ASCEND_ANIMATION_TICKS) task.cancel();
+                if(tickCount[0] >= ASCEND_ANIMATION_TICKS) this.cancel();
             }
         };
+
+        plugin.getLogger().info(endLocation.toString());
 
         task.runTaskTimer(plugin, 1, 1);
     }

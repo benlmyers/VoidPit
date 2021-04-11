@@ -1,18 +1,15 @@
 package com.characterlim.voidpit;
 
-import org.apache.commons.lang.SerializationUtils;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.World;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-import java.util.List;
-
 public class ParticleAnimator {
 
-    private World world;
-    private VoidPitPlugin plugin;
+    private final World world;
+    private final VoidPitPlugin plugin;
     private static final int ITEM_DESTROY_PARTICLE_COUNT = 25;
     private static final int TPS = 20;
     private static final int ASCEND_ANIMATION_TICKS = TPS * 3;
@@ -39,8 +36,7 @@ public class ParticleAnimator {
             @Override
             public void run() {
                 world.spawnParticle(Particle.END_ROD, pos, 1, 0, 0, 0, 0);
-                Vector dPos = dr;
-                pos.add(dPos);
+                pos.add(dr);
                 tickCount[0] += 1;
                 if(tickCount[0] >= ASCEND_ANIMATION_TICKS) this.cancel();
             }

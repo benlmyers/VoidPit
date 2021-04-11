@@ -5,7 +5,6 @@ import com.characterlim.voidpit.VoidPitPlugin;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PitItemManager {
@@ -59,10 +58,6 @@ public class PitItemManager {
         }
         message.setLength(message.length() - 2);
         player.sendMessage(message.toString());
-    }
-
-    public List<Material> getItems() {
-        return Config.Item.items;
     }
 
     private Material getItem(Player player) {

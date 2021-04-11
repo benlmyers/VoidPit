@@ -1,6 +1,5 @@
 package com.characterlim.voidpit.commands;
 
-import com.characterlim.voidpit.Config;
 import com.characterlim.voidpit.Supercommand;
 import com.characterlim.voidpit.VoidPitPlugin;
 import com.characterlim.voidpit.commands.subcommands.HologramSubcommand;
@@ -35,6 +34,7 @@ public class PitCommand extends Supercommand implements TabExecutor {
         if(commandSender instanceof Player) player = (Player) commandSender;
 
         if(args.length == 0) {
+            assert player != null;
             player.sendMessage("§cImproper use of command. Use §e/pit help §cfor more information.");
         } else {
 
@@ -56,6 +56,7 @@ public class PitCommand extends Supercommand implements TabExecutor {
                 case "reload":
                     this.plugin.onDisable();
                     this.plugin.onEnable();
+                    assert player != null;
                     player.sendMessage("§bPlugin successfully reloaded.");
                     break;
             }
@@ -67,8 +68,8 @@ public class PitCommand extends Supercommand implements TabExecutor {
     @Override
     public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] args) {
         if(args.length == 1) {
-            List<String> completions = new ArrayList<String>();
-            List<String> commands = new ArrayList<String>();
+            List<String> completions = new ArrayList<>();
+            List<String> commands = new ArrayList<>();
 
             commands.add("item");
             commands.add("hologram");

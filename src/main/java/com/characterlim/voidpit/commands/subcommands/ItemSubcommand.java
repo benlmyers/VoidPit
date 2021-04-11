@@ -38,6 +38,7 @@ public class ItemSubcommand implements Subcommand {
                     itemManager.removeItem(player);
                     break;
                 case "reset":
+                    assert player != null;
                     itemManager.resetItems(player);
                     break;
                 case "list":

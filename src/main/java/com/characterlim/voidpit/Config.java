@@ -1,7 +1,5 @@
 package com.characterlim.voidpit;
 
-import com.sk89q.worldedit.bukkit.WorldEditPlugin;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 
@@ -40,7 +38,7 @@ public class Config {
         }
 
         public static void save() {
-            List<String> itemStrings = new ArrayList<String>();
+            List<String> itemStrings = new ArrayList<>();
             for(Material item : Config.Item.items) itemStrings.add(item.toString());
             plugin.getConfig().set("accepted-items", itemStrings);
             plugin.saveConfig();

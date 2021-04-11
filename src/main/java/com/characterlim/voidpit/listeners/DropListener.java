@@ -3,14 +3,11 @@ package com.characterlim.voidpit.listeners;
 import com.characterlim.voidpit.Config;
 import com.characterlim.voidpit.ParticleAnimator;
 import com.characterlim.voidpit.VoidPitPlugin;
-import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.regions.Region;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.Particle;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -23,14 +20,14 @@ import java.util.List;
 
 public class DropListener implements Listener {
 
-    private VoidPitPlugin plugin;
-    private List<Material> acceptedItems = new ArrayList<>();
+    private final VoidPitPlugin plugin;
+    private final List<Material> acceptedItems = new ArrayList<>();
     private ParticleAnimator particleAnimator;
     private Region pitRegion = null;
 
     private static final long TPS = 20;
     private static final long CHECK_DELAY = 2 * TPS;
-    private static final long CHECK_PERIOD = 1 * TPS;
+    private static final long CHECK_PERIOD = TPS;
     private static final int MAX_CHECKS = 6;
 
     public DropListener(VoidPitPlugin instance) {
@@ -41,14 +38,12 @@ public class DropListener implements Listener {
     @EventHandler
     public void dropEvent(PlayerDropItemEvent event) {
         final int[] count = {0};
-
         BukkitRunnable task = new BukkitRunnable() {
             @Override
             public void run() {
                 count[0] = checkDrop(event, this, count[0]);
             }
         };
-
         task.runTaskTimer(plugin, CHECK_DELAY, CHECK_PERIOD);
     }
 

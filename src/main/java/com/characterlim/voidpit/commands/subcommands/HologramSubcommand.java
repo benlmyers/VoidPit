@@ -3,7 +3,6 @@ package com.characterlim.voidpit.commands.subcommands;
 import com.characterlim.voidpit.Subcommand;
 import com.characterlim.voidpit.VoidPitPlugin;
 import com.characterlim.voidpit.managers.PitHologramManager;
-import com.characterlim.voidpit.managers.PitItemManager;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
@@ -30,9 +29,11 @@ public class HologramSubcommand implements Subcommand {
         } else {
             switch(args[0]) {
                 case "setposition":
+                    assert player != null;
                     hologramManager.setPosition(player);
                     break;
                 case "showposition":
+                    assert player != null;
                     hologramManager.showPosition(player);
                     break;
                 case "help":

@@ -12,7 +12,7 @@ import java.util.List;
 
 public class RegionSubcommand implements Subcommand {
 
-    private PitRegionManager regionManager;
+    private final PitRegionManager regionManager;
 
     public RegionSubcommand(VoidPitPlugin instance) {
         this.regionManager = new PitRegionManager(instance);

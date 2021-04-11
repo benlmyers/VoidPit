@@ -3,17 +3,14 @@ package com.characterlim.voidpit;
 import com.characterlim.voidpit.commands.PitCommand;
 import com.characterlim.voidpit.listeners.DropListener;
 import org.bukkit.command.TabExecutor;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class VoidPitPlugin extends JavaPlugin {
 
-    private FileConfiguration config;
     private DropListener dropListener;
 
     @Override
     public void onEnable() {
-        this.config = getConfig();
         this.dropListener = new DropListener(this);
 
         this.getLogger().info("=-=-=-=-= Void Hole =-=-=-=-=");

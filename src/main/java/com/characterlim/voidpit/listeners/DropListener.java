@@ -1,5 +1,8 @@
-package com.characterlim.voidpit;
+package com.characterlim.voidpit.listeners;
 
+import com.characterlim.voidpit.Config;
+import com.characterlim.voidpit.ParticleAnimator;
+import com.characterlim.voidpit.VoidPitPlugin;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.regions.CuboidRegion;

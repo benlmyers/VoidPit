@@ -1,5 +1,8 @@
-package com.characterlim.voidpit;
+package com.characterlim.voidpit.commands.subcommands;
 
+import com.characterlim.voidpit.Subcommand;
+import com.characterlim.voidpit.VoidPitPlugin;
+import com.characterlim.voidpit.managers.PitItemManager;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;

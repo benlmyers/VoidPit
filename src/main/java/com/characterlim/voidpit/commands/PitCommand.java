@@ -1,5 +1,10 @@
-package com.characterlim.voidpit;
+package com.characterlim.voidpit.commands;
 
+import com.characterlim.voidpit.Config;
+import com.characterlim.voidpit.Supercommand;
+import com.characterlim.voidpit.VoidPitPlugin;
+import com.characterlim.voidpit.commands.subcommands.ItemSubcommand;
+import com.characterlim.voidpit.commands.subcommands.RegionSubcommand;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;

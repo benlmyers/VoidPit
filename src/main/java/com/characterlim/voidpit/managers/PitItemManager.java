@@ -1,5 +1,7 @@
-package com.characterlim.voidpit;
+package com.characterlim.voidpit.managers;
 
+import com.characterlim.voidpit.Config;
+import com.characterlim.voidpit.VoidPitPlugin;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 

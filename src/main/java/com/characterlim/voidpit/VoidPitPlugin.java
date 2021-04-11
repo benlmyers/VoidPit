@@ -1,5 +1,7 @@
 package com.characterlim.voidpit;
 
+import com.characterlim.voidpit.commands.PitCommand;
+import com.characterlim.voidpit.listeners.DropListener;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;

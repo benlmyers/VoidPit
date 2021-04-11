@@ -19,24 +19,24 @@ public class ParticleAnimator {
     }
 
     public void animateItemDestroy(Location location) {
-        this.world.spawnParticle(Particle.SMOKE_LARGE, location, ITEM_DESTROY_PARTICLE_COUNT);
+        this.world.spawnParticle(Particle.SMOKE_LARGE, location, ITEM_DESTROY_PARTICLE_COUNT, 0, 1, 0, 0);
     }
 
     public void animateAscend(Location startLocation, int height) {
         Location pos = startLocation;
-        final int[] trackedHeight = {0};
+        final double[] trackedHeight = {0};
 
         task = new BukkitRunnable() {
             @Override
             public void run() {
-                world.spawnParticle(Particle.END_ROD, pos, 1);
-                Vector dPos = new Vector(0, 1, 0);
+                world.spawnParticle(Particle.END_ROD, pos, 1, 0, 0, 0, 0);
+                Vector dPos = new Vector(0, 0.5, 0);
                 pos.add(dPos);
                 trackedHeight[0] += dPos.getY();
                 if(trackedHeight[0] >= height) task.cancel();
             }
         };
 
-        task.runTaskTimer(plugin, 1, 2);
+        task.runTaskTimer(plugin, 1, 1);
     }
 }

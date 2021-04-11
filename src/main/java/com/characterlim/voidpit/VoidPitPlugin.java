@@ -25,6 +25,8 @@ public class VoidPitPlugin extends JavaPlugin {
         this.getCommand("pit").setTabCompleter(tabExecutor);
 
         getServer().getPluginManager().registerEvents(dropListener, this);
+
+        Config.load();
     }
 
     @Override
@@ -42,6 +44,5 @@ public class VoidPitPlugin extends JavaPlugin {
         config.options().copyDefaults(true);
         saveConfig();
         Config.plugin = this;
-        Config.load();
     }
 }

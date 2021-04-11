@@ -86,6 +86,7 @@ public class DropListener implements Listener {
             if(this.pitRegion.contains(dropPosition)) {
                 player.sendMessage("§bYou've sacrificed §9" + stack.getAmount() + "§b items to the Pit!");
                 particleAnimator.animateItemDestroy(dropLocation);
+                particleAnimator.animateAscend(dropLocation, 15);
                 event.getItemDrop().remove();
             }
         }

@@ -61,6 +61,7 @@ public class PitCommand extends Supercommand implements TabExecutor {
             commands.add("item");
             commands.add("help");
             commands.add("region");
+            commands.add("reload");
 
             StringUtil.copyPartialMatches(args[0], commands, completions);
             return completions;

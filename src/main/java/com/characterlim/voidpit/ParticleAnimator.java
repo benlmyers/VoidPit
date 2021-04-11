@@ -11,6 +11,8 @@ public class ParticleAnimator {
     private World world;
     private VoidPitPlugin plugin;
     private static final int ITEM_DESTROY_PARTICLE_COUNT = 25;
+    private static final int TPS = 20;
+    private static final int ASCEND_ANIMATION_TICKS = TPS * 3;
     private BukkitRunnable task = null;
 
     public ParticleAnimator(World world, VoidPitPlugin instance) {
@@ -22,18 +24,22 @@ public class ParticleAnimator {
         this.world.spawnParticle(Particle.SMOKE_LARGE, location, ITEM_DESTROY_PARTICLE_COUNT, 0, 1, 0, 0);
     }
 
-    public void animateAscend(Location startLocation, int height) {
+    public void animateAscend(Location startLocation) {
+
         Location pos = startLocation;
-        final double[] trackedHeight = {0};
+        Location endLocation = Config.Hologram.pos;
+
+        Vector dr = endLocation.subtract(startLocation).toVector().multiply(0.01 /*1.0 / ASCEND_ANIMATION_TICKS*/);
+        final int[] tickCount = {0};
 
         task = new BukkitRunnable() {
             @Override
             public void run() {
                 world.spawnParticle(Particle.END_ROD, pos, 1, 0, 0, 0, 0);
-                Vector dPos = new Vector(0, 0.5, 0);
+                Vector dPos = dr;
                 pos.add(dPos);
-                trackedHeight[0] += dPos.getY();
-                if(trackedHeight[0] >= height) task.cancel();
+                tickCount[0] += 1;
+                if(tickCount[0] >= ASCEND_ANIMATION_TICKS) task.cancel();
             }
         };
 

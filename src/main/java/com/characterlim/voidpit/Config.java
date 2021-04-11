@@ -49,14 +49,14 @@ public class Config {
 
     public static class Hologram {
 
-        public static Location location;
+        public static Location pos;
 
         public static void load() {
-            location = plugin.getConfig().getLocation("hologram-position");
+            pos = plugin.getConfig().getLocation("pos-hologram");
         }
 
         public static void save() {
-            plugin.getConfig().addDefault("hologram-position", location);
+            plugin.getConfig().addDefault("pos-hologram", pos);
             plugin.saveConfig();
         }
     }
@@ -64,10 +64,12 @@ public class Config {
     public static void load() {
         Region.load();
         Item.load();
+        Hologram.load();
     }
 
     public static void save() {
         Region.save();
         Item.save();
+        Hologram.save();
     }
 }

@@ -21,5 +21,12 @@ public class PitHologramManager {
     }
 
     public void setPosition(Player player) {
+        Config.Hologram.pos = player.getLocation();
+        Config.Hologram.save();
+        player.sendMessage("§bHologram location set to §9 " + Config.Hologram.pos.toString() + "§b.");
+    }
+
+    public void showPosition(Player player) {
+        player.sendMessage("§bLocation: §9" + Config.Hologram.pos.toString());
     }
 }

@@ -32,6 +32,9 @@ public class HologramSubcommand implements Subcommand {
                 case "setposition":
                     hologramManager.setPosition(player);
                     break;
+                case "showposition":
+                    hologramManager.showPosition(player);
+                    break;
                 case "help":
                     assert player != null;
                     player.sendMessage("§e/pit hologram help§b: Get help on this command");
@@ -46,6 +49,8 @@ public class HologramSubcommand implements Subcommand {
         List<String> completions = new ArrayList<>();
         List<String> commands = new ArrayList<>();
 
+        commands.add("setposition");
+        commands.add("showposition");
         commands.add("help");
 
         StringUtil.copyPartialMatches(arg, commands, completions);

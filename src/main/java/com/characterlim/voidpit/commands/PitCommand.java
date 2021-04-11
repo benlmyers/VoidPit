@@ -58,6 +58,8 @@ public class PitCommand extends Supercommand implements TabExecutor {
                     Config.load();
                     player.sendMessage("§bPlugin successfully reloaded.");
                     break;
+                case "save":
+                    Config.save();
             }
         }
 

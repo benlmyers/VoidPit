@@ -22,8 +22,8 @@ public class Config {
         }
 
         public static void save() {
-            plugin.getConfig().addDefault("region-corner1", pos1);
-            plugin.getConfig().addDefault("region-corner2", pos2);
+            plugin.getConfig().set("region-corner1", pos1);
+            plugin.getConfig().set("region-corner2", pos2);
             plugin.saveConfig();
         }
     }
@@ -42,7 +42,7 @@ public class Config {
         public static void save() {
             List<String> itemStrings = new ArrayList<String>();
             for(Material item : Config.Item.items) itemStrings.add(item.toString());
-            plugin.getConfig().addDefault("accepted-items", itemStrings);
+            plugin.getConfig().set("accepted-items", itemStrings);
             plugin.saveConfig();
         }
     }
@@ -56,7 +56,7 @@ public class Config {
         }
 
         public static void save() {
-            plugin.getConfig().addDefault("pos-hologram", pos);
+            plugin.getConfig().set("pos-hologram", pos);
             plugin.saveConfig();
         }
     }

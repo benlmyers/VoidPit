@@ -6,6 +6,8 @@ import org.bukkit.World;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
+import static java.lang.Math.floor;
+
 public class ParticleAnimator {
 
     private final World world;
@@ -13,7 +15,6 @@ public class ParticleAnimator {
     private static final int ITEM_DESTROY_PARTICLE_COUNT = 25;
     private static final int TPS = 20;
     private static final int ASCEND_ANIMATION_TICKS = TPS * 3;
-    //private List<BukkitRunnable> tasks = null;
 
     public ParticleAnimator(World world, VoidPitPlugin instance) {
         this.world = world;
@@ -27,22 +28,27 @@ public class ParticleAnimator {
     public void animateAscend(Location startLocation) {
 
         Location pos = startLocation;
+
         Location endLocation = new Location(Config.Hologram.pos.getWorld(), Config.Hologram.pos.getX(), Config.Hologram.pos.getY(), Config.Hologram.pos.getZ());
 
-        Vector dr = endLocation.subtract(startLocation).toVector().multiply(0.01 /*1.0 / ASCEND_ANIMATION_TICKS*/);
+        Vector dr = endLocation.subtract(startLocation).toVector().multiply(1.0 / ASCEND_ANIMATION_TICKS);
         final int[] tickCount = {0};
+
+        plugin.getLogger().info("start = " + pos);
+        plugin.getLogger().info("dr = " + dr.toString());
 
         BukkitRunnable task = new BukkitRunnable() {
             @Override
             public void run() {
                 world.spawnParticle(Particle.END_ROD, pos, 1, 0, 0, 0, 0);
-                pos.add(dr);
-                tickCount[0] += 1;
+                int dt = 1 + (int)floor(tickCount[0] / 10.0);
+                tickCount[0] += dt;
+                Vector change = new Vector(dr.getX(), dr.getY(), dr.getZ()).multiply(dt);
+                pos.add(change);
+                plugin.getLogger().info("spawning particle at " + pos);
                 if(tickCount[0] >= ASCEND_ANIMATION_TICKS) this.cancel();
             }
         };
-
-        plugin.getLogger().info(endLocation.toString());
 
         task.runTaskTimer(plugin, 1, 1);
     }

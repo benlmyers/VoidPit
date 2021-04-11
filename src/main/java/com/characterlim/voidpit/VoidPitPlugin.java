@@ -11,6 +11,9 @@ public class VoidPitPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        Config.plugin = this;
+        Config.load();
+
         this.dropListener = new DropListener(this);
 
         this.getLogger().info("=-=-=-=-= Void Hole =-=-=-=-=");
@@ -22,9 +25,6 @@ public class VoidPitPlugin extends JavaPlugin {
         this.getCommand("pit").setTabCompleter(tabExecutor);
 
         getServer().getPluginManager().registerEvents(dropListener, this);
-
-        Config.plugin = this;
-        Config.load();
     }
 
     @Override

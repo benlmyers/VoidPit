@@ -59,15 +59,33 @@ public class Config {
         }
     }
 
+    public static class Energy {
+
+        public static int energy = 0;
+        public static int maxEnergy = 100000;
+
+        public static void load() {
+            energy = plugin.getConfig().getInt("energy");
+            maxEnergy = plugin.getConfig().getInt("max-energy");
+        }
+
+        public static void save() {
+            plugin.getConfig().set("energy", energy);
+            plugin.getConfig().set("max-energy", maxEnergy);
+        }
+    }
+
     public static void load() {
         Region.load();
         Item.load();
         Hologram.load();
+        Energy.load();
     }
 
     public static void save() {
         Region.save();
         Item.save();
         Hologram.save();
+        Energy.save();
     }
 }

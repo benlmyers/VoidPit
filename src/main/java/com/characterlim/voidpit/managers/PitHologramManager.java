@@ -58,16 +58,20 @@ public class PitHologramManager {
     }
 
     private static String acceptedItemStrings() {
-        String str = "§b";
-        if(Config.Item.items.size() > 0) {
-            for (int i = 0; i < Config.Item.items.size() - 1; i++) {
-                str += Config.Item.items.get(i) + ", ";
+        if(Config.Hologram.label == null || Config.Hologram.label == "") {
+            String str = "§b";
+            if(Config.Item.items.size() > 0) {
+                for (int i = 0; i < Config.Item.items.size() - 1; i++) {
+                    str += Config.Item.items.get(i) + ", ";
+                }
+                str += Config.Item.items.get(Config.Item.items.size() - 1);
+            } else {
+                str = "§b(none)";
             }
-            str += Config.Item.items.get(Config.Item.items.size() - 1);
+            return str;
         } else {
-            str = "§b(none)";
+            return "§b" + Config.Hologram.label;
         }
-        return str;
     }
 
     private static String progressString() {

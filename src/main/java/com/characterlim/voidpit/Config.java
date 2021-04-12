@@ -2,11 +2,9 @@ package com.characterlim.voidpit;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.configuration.ConfigurationSection;
 
-import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.Hashtable;
-import java.util.List;
+import java.util.*;
 
 public class Config {
 
@@ -71,13 +69,22 @@ public class Config {
         public static void load() {
             energy = plugin.getConfig().getInt("energy");
             maxEnergy = plugin.getConfig().getInt("max-energy");
-            userEnergy = (Hashtable<String, Integer>) plugin.getConfig().get("user-energies");
+            ConfigurationSection sec = plugin.getConfig().getConfigurationSection("contributions");
+            if(sec != null) {
+                Set<String> keys = sec.getKeys(false);
+                for (String key : keys)
+                    userEnergy.put(key, sec.getInt(key));
+            } else {
+                plugin.getConfig().set("contributions.dummy", 0);
+            }
         }
 
         public static void save() {
             plugin.getConfig().set("energy", energy);
             plugin.getConfig().set("max-energy", maxEnergy);
-            plugin.getConfig().set("user-energies", userEnergy);
+            Set<String> keys = userEnergy.keySet();
+            for(String key: keys) plugin.getConfig().getConfigurationSection("contributions").set(key, userEnergy.get(key));
+            plugin.saveConfig();
         }
     }
 

@@ -52,12 +52,10 @@ public class ParticleAnimator {
                     tickCount[0] += dt;
                     Vector change = new Vector(dr.getX(), dr.getY(), dr.getZ()).multiply(dt);
                     pos.add(change);
-                    plugin.getLogger().info("offset = " + offset);
                     if (tickCount[0] >= ASCEND_ANIMATION_TICKS) {
-                        world.spawnParticle(Particle.FIREWORKS_SPARK, spawnLoc, 10, 0, 0, 0, 0);
+                        world.spawnParticle(Particle.VILLAGER_HAPPY, spawnLoc, 10, 1, 0, 0, 0);
                         handler.onCompletion();
                         added[0] = true;
-                        PitHologramManager.refresh();
                         this.cancel();
                     }
                 }

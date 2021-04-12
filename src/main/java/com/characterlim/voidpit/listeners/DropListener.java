@@ -4,6 +4,7 @@ import com.characterlim.voidpit.CompletionHandler;
 import com.characterlim.voidpit.Config;
 import com.characterlim.voidpit.ParticleAnimator;
 import com.characterlim.voidpit.VoidPitPlugin;
+import com.characterlim.voidpit.managers.PitHologramManager;
 import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.regions.Region;
@@ -100,5 +101,6 @@ public class DropListener implements Listener {
         Config.Energy.energy += amount;
         Config.Energy.userEnergy.put(player.getName(), amount);
         Config.Energy.save();
+        PitHologramManager.refresh();
     }
 }

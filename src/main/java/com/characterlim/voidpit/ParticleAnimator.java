@@ -51,7 +51,7 @@ public class ParticleAnimator {
                 pos.add(change);
                 plugin.getLogger().info("offset = " + offset);
                 if(tickCount[0] >= ASCEND_ANIMATION_TICKS) {
-                    world.spawnParticle(Particle.FIREWORKS_SPARK, 1, 0, 0, 0);
+                    world.spawnParticle(Particle.FIREWORKS_SPARK, spawnLoc, 10, 0, 0, 0, 0);
                     handler.onCompletion();
                     this.cancel();
                 }

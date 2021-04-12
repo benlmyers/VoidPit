@@ -4,6 +4,8 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.List;
 
 public class Config {
@@ -63,15 +65,18 @@ public class Config {
 
         public static int energy = 0;
         public static int maxEnergy = 100000;
+        public static Hashtable<String, Integer> userEnergy = new Hashtable<String, Integer>();
 
         public static void load() {
             energy = plugin.getConfig().getInt("energy");
             maxEnergy = plugin.getConfig().getInt("max-energy");
+            userEnergy = (Hashtable<String, Integer>) plugin.getConfig().get("user-energies");
         }
 
         public static void save() {
             plugin.getConfig().set("energy", energy);
             plugin.getConfig().set("max-energy", maxEnergy);
+            plugin.getConfig().set("user-energies", userEnergy);
         }
     }
 

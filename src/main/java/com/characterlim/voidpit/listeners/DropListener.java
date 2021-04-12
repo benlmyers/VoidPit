@@ -88,7 +88,7 @@ public class DropListener implements Listener {
                 particleAnimator.animateAscend(dropLocation, new CompletionHandler() {
                     @Override
                     public void onCompletion() {
-                        handleParticleFinished();
+                        handleParticleFinished(player, stack.getAmount());
                     }
                 });
                 event.getItemDrop().remove();
@@ -96,7 +96,9 @@ public class DropListener implements Listener {
         }
     }
 
-    private void handleParticleFinished() {
-        // ...
+    private void handleParticleFinished(Player player, int amount) {
+        Config.Energy.energy += amount;
+        Config.Energy.userEnergy.put(player.getName(), amount);
+        Config.Energy.save();
     }
 }

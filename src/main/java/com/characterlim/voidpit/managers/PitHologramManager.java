@@ -20,6 +20,10 @@ public class PitHologramManager {
 
     public PitHologramManager(VoidPitPlugin instance) {
         this.plugin = instance;
+        refresh();
+    }
+
+    public void refresh() {
         hologram = HologramsAPI.createHologram(plugin, Config.Hologram.pos);
         line1 = hologram.appendTextLine("§d§lTHE PIT");
         line2 = hologram.appendTextLine("§eAccepted Items: " + acceptedItemStrings());
@@ -32,6 +36,7 @@ public class PitHologramManager {
         Config.Hologram.pos = player.getLocation();
         Config.Hologram.save();
         player.sendMessage("§bHologram location set to §9 " + Config.Hologram.pos.toString() + "§b.");
+        refresh();
     }
 
     public void showPosition(Player player) {

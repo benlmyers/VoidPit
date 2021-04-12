@@ -33,6 +33,7 @@ public class Config {
         public static List<Material> items = new ArrayList<>();
 
         public static void load() {
+            items = new ArrayList<>();
             List<String> itemStrings = (List<String>) plugin.getConfig().getList("accepted-items");
             if(itemStrings != null) {
                 for(String itemString: itemStrings) items.add(Material.getMaterial(itemString));

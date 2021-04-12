@@ -36,8 +36,13 @@ public class HologramSubcommand implements Subcommand {
                     assert player != null;
                     hologramManager.showPosition(player);
                     break;
+                case "refresh":
+                    hologramManager.refresh();
                 case "help":
                     assert player != null;
+                    player.sendMessage("§e/pit hologram setposition§b: Set the position of the Hologram");
+                    player.sendMessage("§e/pit hologram showposition§b: Display the position of the Hologram");
+                    player.sendMessage("§e/pit hologram refresh§b: Refresh the Hologram");
                     player.sendMessage("§e/pit hologram help§b: Get help on this command");
                     break;
             }
@@ -52,6 +57,7 @@ public class HologramSubcommand implements Subcommand {
 
         commands.add("setposition");
         commands.add("showposition");
+        commands.add("refresh");
         commands.add("help");
 
         StringUtil.copyPartialMatches(arg, commands, completions);

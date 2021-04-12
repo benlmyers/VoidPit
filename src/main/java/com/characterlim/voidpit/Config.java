@@ -49,13 +49,16 @@ public class Config {
     public static class Hologram {
 
         public static Location pos;
+        public static String label = "";
 
         public static void load() {
             pos = plugin.getConfig().getLocation("pos-hologram");
+            label = plugin.getConfig().getString("hologram-label");
         }
 
         public static void save() {
             plugin.getConfig().set("pos-hologram", pos);
+            plugin.getConfig().set("hologram-label", label);
             plugin.saveConfig();
         }
     }

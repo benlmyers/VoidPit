@@ -97,6 +97,8 @@ public class PitCommand extends Supercommand implements TabExecutor {
                     return regionSubcommand.completions(args[1]);
                 case "hologram":
                     return hologramSubcommand.completions(args[1]);
+                case "energy":
+                    return energySubcommand.completions(args[1]);
             }
         }
         return null;

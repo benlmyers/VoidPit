@@ -50,6 +50,13 @@ public class PitHologramManager {
         player.sendMessage("§bLocation: §9" + Config.Hologram.pos.toString());
     }
 
+    public void setLabel(Player player, String label) {
+        Config.Hologram.label = label;
+        Config.Hologram.save();
+        player.sendMessage("§bHologram label set to: \"§9" + label + "§b\".");
+        PitHologramManager.refresh();
+    }
+
     private static String acceptedItemStrings() {
         String str = "§b";
         if(Config.Item.items.size() > 0) {

@@ -36,6 +36,9 @@ public class HologramSubcommand implements Subcommand {
                     assert player != null;
                     hologramManager.showPosition(player);
                     break;
+                case "setlabel":
+                    assert player != null;
+                    hologramManager.setLabel(player, args[1]);
                 case "refresh":
                     hologramManager.refresh();
                     break;

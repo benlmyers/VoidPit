@@ -99,7 +99,7 @@ public class DropListener implements Listener {
 
     private void handleParticleFinished(Player player, int amount) {
         Config.Energy.energy += amount;
-        Config.Energy.userEnergy.put(player.getName(), amount);
+        Config.Energy.userEnergy.put(player.getName(), Config.Energy.userEnergy.get(player.getName()) + amount);
         Config.Energy.save();
         PitHologramManager.refresh();
     }

@@ -24,7 +24,9 @@ public class PitHologramManager {
     }
 
     public void refresh() {
-        hologram.clearLines();
+        if(hologram != null) {
+            if(!hologram.isDeleted()) hologram.delete();
+        }
         hologram = HologramsAPI.createHologram(plugin, Config.Hologram.pos);
         line1 = hologram.appendTextLine("§d§lTHE PIT");
         line2 = hologram.appendTextLine("§eAccepted Items: " + acceptedItemStrings());

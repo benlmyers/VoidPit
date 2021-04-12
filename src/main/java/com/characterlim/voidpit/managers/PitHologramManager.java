@@ -24,12 +24,13 @@ public class PitHologramManager {
     }
 
     public void refresh() {
+        hologram.clearLines();
         hologram = HologramsAPI.createHologram(plugin, Config.Hologram.pos);
         line1 = hologram.appendTextLine("§d§lTHE PIT");
         line2 = hologram.appendTextLine("§eAccepted Items: " + acceptedItemStrings());
         line3 = hologram.appendTextLine("§eProgress: " + progressString());
         line4 = hologram.appendTextLine(progressBar());
-        line5 = hologram.appendItemLine(new ItemStack(Material.SNOW_BLOCK));
+        line5 = hologram.appendItemLine(new ItemStack(Material.QUARTZ_BLOCK, 1));
     }
 
     public void setPosition(Player player) {
@@ -61,7 +62,7 @@ public class PitHologramManager {
         double max = Config.Energy.maxEnergy;
         double ratio = progress / max;
         int percent = (int) (1000.0 * ratio);
-        return "§a" + progress + "§7/§r" + max + " §7(§a" + percent + "§7)";
+        return "§a" + progress + "§7/§r" + max + " §7(§a" + percent + "%§7)";
     }
 
     private String progressBar() {

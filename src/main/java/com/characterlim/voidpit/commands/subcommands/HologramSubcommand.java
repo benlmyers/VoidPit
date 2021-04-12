@@ -38,6 +38,7 @@ public class HologramSubcommand implements Subcommand {
                     break;
                 case "refresh":
                     hologramManager.refresh();
+                    break;
                 case "help":
                     assert player != null;
                     player.sendMessage("§e/pit hologram setposition§b: Set the position of the Hologram");

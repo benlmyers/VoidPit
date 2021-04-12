@@ -12,20 +12,22 @@ import org.bukkit.inventory.ItemStack;
 
 public class PitHologramManager {
 
-    private final VoidPitPlugin plugin;
-    private Hologram hologram;
-    private TextLine line1, line2, line3, line4;
-    private ItemLine line5;
+    private static VoidPitPlugin plugin = null;
+    private static Hologram hologram;
+    private static TextLine line1, line2, line3, line4;
+    private static ItemLine line5;
     private static final int PROGRESS_BAR_LENGTH = 18;
 
     public PitHologramManager(VoidPitPlugin instance) {
-        this.plugin = instance;
+        plugin = instance;
         refresh();
     }
 
-    public void refresh() {
+    public static void refresh() {
         if(hologram != null) {
-            if(!hologram.isDeleted()) hologram.delete();
+            hologram.clearLines();
+            hologram.delete();
+            hologram = null;
         }
         hologram = HologramsAPI.createHologram(plugin, Config.Hologram.pos);
         line1 = hologram.appendTextLine("§d§lTHE PIT");
@@ -46,7 +48,7 @@ public class PitHologramManager {
         player.sendMessage("§bLocation: §9" + Config.Hologram.pos.toString());
     }
 
-    private String acceptedItemStrings() {
+    private static String acceptedItemStrings() {
         String str = "§b";
         if(Config.Item.items.size() > 0) {
             for (int i = 0; i < Config.Item.items.size() - 1; i++) {
@@ -59,15 +61,16 @@ public class PitHologramManager {
         return str;
     }
 
-    private String progressString() {
+    private static String progressString() {
         double progress = Config.Energy.energy;
         double max = Config.Energy.maxEnergy;
         double ratio = progress / max;
-        int percent = (int) (1000.0 * ratio);
-        return "§a" + progress + "§7/§r" + max + " §7(§a" + percent + "%§7)";
+        int percent = (int) (10000.0 * ratio);
+        float shownPercent = (float) (percent / 100.0);
+        return "§a" + (int)progress + "§7/§r" + (int)max + " §7(§a" + shownPercent + "%§7)";
     }
 
-    private String progressBar() {
+    private static String progressBar() {
         double progress = Config.Energy.energy;
         double max = Config.Energy.maxEnergy;
         double ratio = progress / max;

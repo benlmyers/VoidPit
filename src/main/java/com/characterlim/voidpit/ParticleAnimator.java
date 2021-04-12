@@ -1,5 +1,6 @@
 package com.characterlim.voidpit;
 
+import com.characterlim.voidpit.managers.PitHologramManager;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.World;
@@ -33,6 +34,7 @@ public class ParticleAnimator {
 
         double height = endLocation.getY() - startLocation.getY();
         double triggerHeight = startLocation.getY() + (height / 2);
+        final boolean[] added = {false};
 
         Vector dr = endLocation.subtract(startLocation).toVector().multiply(1.0 / ASCEND_ANIMATION_TICKS);
         final int[] tickCount = {0};
@@ -40,20 +42,24 @@ public class ParticleAnimator {
         BukkitRunnable task = new BukkitRunnable() {
             @Override
             public void run() {
-                Vector spawnPos = new Vector(pos.getX(), pos.getY(), pos.getZ());
-                double offset = height/2 - Math.abs(triggerHeight - pos.getY());
-                spawnPos.add(new Vector(0.3 * offset * sin(tickCount[0] * 0.05), 0, 0.3 * offset * cos(tickCount[0] * 0.05)));
-                Location spawnLoc = new Location(world, spawnPos.getX(), spawnPos.getY(), spawnPos.getZ());
-                world.spawnParticle(Particle.END_ROD, spawnLoc, 1, 0, 0, 0, 0);
-                int dt = 1 + (int)floor(tickCount[0] / 50.0);
-                tickCount[0] += dt;
-                Vector change = new Vector(dr.getX(), dr.getY(), dr.getZ()).multiply(dt);
-                pos.add(change);
-                plugin.getLogger().info("offset = " + offset);
-                if(tickCount[0] >= ASCEND_ANIMATION_TICKS) {
-                    world.spawnParticle(Particle.FIREWORKS_SPARK, spawnLoc, 10, 0, 0, 0, 0);
-                    handler.onCompletion();
-                    this.cancel();
+                if(!added[0]) {
+                    Vector spawnPos = new Vector(pos.getX(), pos.getY(), pos.getZ());
+                    double offset = height / 2 - Math.abs(triggerHeight - pos.getY());
+                    spawnPos.add(new Vector(0.3 * offset * sin(tickCount[0] * 0.05), 0, 0.3 * offset * cos(tickCount[0] * 0.05)));
+                    Location spawnLoc = new Location(world, spawnPos.getX(), spawnPos.getY(), spawnPos.getZ());
+                    world.spawnParticle(Particle.END_ROD, spawnLoc, 1, 0, 0, 0, 0);
+                    int dt = 1 + (int) floor(tickCount[0] / 50.0);
+                    tickCount[0] += dt;
+                    Vector change = new Vector(dr.getX(), dr.getY(), dr.getZ()).multiply(dt);
+                    pos.add(change);
+                    plugin.getLogger().info("offset = " + offset);
+                    if (tickCount[0] >= ASCEND_ANIMATION_TICKS) {
+                        world.spawnParticle(Particle.FIREWORKS_SPARK, spawnLoc, 10, 0, 0, 0, 0);
+                        handler.onCompletion();
+                        added[0] = true;
+                        PitHologramManager.refresh();
+                        this.cancel();
+                    }
                 }
             }
         };

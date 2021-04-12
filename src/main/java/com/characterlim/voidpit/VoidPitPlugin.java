@@ -2,6 +2,7 @@ package com.characterlim.voidpit;
 
 import com.characterlim.voidpit.commands.PitCommand;
 import com.characterlim.voidpit.listeners.DropListener;
+import com.characterlim.voidpit.managers.PitHologramManager;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -25,6 +26,7 @@ public class VoidPitPlugin extends JavaPlugin {
         this.getCommand("pit").setTabCompleter(tabExecutor);
 
         getServer().getPluginManager().registerEvents(dropListener, this);
+        PitHologramManager.refresh();
     }
 
     @Override
@@ -35,5 +37,6 @@ public class VoidPitPlugin extends JavaPlugin {
 
     public void updateItemsOrRegion() {
         dropListener.fetchItemsAndRegion();
+        PitHologramManager.refresh();
     }
 }

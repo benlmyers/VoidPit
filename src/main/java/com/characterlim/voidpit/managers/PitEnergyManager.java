@@ -18,8 +18,10 @@ public class PitEnergyManager {
         this.plugin = instance;
     }
 
-    public void setMaxEnergy(int amount) {
+    public void setMaxEnergy(Player player, int amount) {
         Config.Energy.maxEnergy = amount;
         Config.Energy.save();
+        player.sendMessage("§bMax energy set to §9" + amount + "§b.");
+        PitHologramManager.refresh();
     }
 }

@@ -81,6 +81,7 @@ public class PitCommand extends Supercommand implements TabExecutor {
             List<String> commands = new ArrayList<>();
 
             commands.add("item");
+            commands.add("energy");
             commands.add("hologram");
             commands.add("help");
             commands.add("region");

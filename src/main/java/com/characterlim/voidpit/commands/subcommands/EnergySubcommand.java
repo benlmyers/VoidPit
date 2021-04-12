@@ -30,7 +30,8 @@ public class EnergySubcommand implements Subcommand {
         } else {
             switch(args[0]) {
                 case "setmax":
-                    if(args[1] != null)  energyManager.setMaxEnergy(Integer.parseInt(args[1]));
+                    if(args[1] != null)  energyManager.setMaxEnergy(player, Integer.parseInt(args[1]));
+                    else player.sendMessage("§bUsage: §e/pit energy setmax <amount>");
                     break;
                 case "help":
                     assert player != null;
@@ -47,9 +48,7 @@ public class EnergySubcommand implements Subcommand {
         List<String> completions = new ArrayList<>();
         List<String> commands = new ArrayList<>();
 
-        commands.add("setposition");
-        commands.add("showposition");
-        commands.add("refresh");
+        commands.add("setmax");
         commands.add("help");
 
         StringUtil.copyPartialMatches(arg, commands, completions);

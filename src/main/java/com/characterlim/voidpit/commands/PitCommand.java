@@ -2,6 +2,7 @@ package com.characterlim.voidpit.commands;
 
 import com.characterlim.voidpit.Supercommand;
 import com.characterlim.voidpit.VoidPitPlugin;
+import com.characterlim.voidpit.commands.subcommands.EnergySubcommand;
 import com.characterlim.voidpit.commands.subcommands.HologramSubcommand;
 import com.characterlim.voidpit.commands.subcommands.ItemSubcommand;
 import com.characterlim.voidpit.commands.subcommands.RegionSubcommand;
@@ -20,12 +21,14 @@ public class PitCommand extends Supercommand implements TabExecutor {
     private final ItemSubcommand itemSubcommand;
     private final RegionSubcommand regionSubcommand;
     private final HologramSubcommand hologramSubcommand;
+    private final EnergySubcommand energySubcommand;
 
     public PitCommand(VoidPitPlugin instance) {
         this.plugin = instance;
         this.itemSubcommand = new ItemSubcommand(instance);
         this.regionSubcommand = new RegionSubcommand(instance);
         this.hologramSubcommand = new HologramSubcommand(instance);
+        this.energySubcommand = new EnergySubcommand(instance);
     }
 
     @Override
@@ -48,8 +51,14 @@ public class PitCommand extends Supercommand implements TabExecutor {
                 case "hologram":
                     executeSubcommand(commandSender, args, hologramSubcommand);
                     break;
+                case "energy":
+                    executeSubcommand(commandSender, args, energySubcommand);
+                    break;
                 case "help":
                     player.sendMessage("§e/pit item§b: Configure the item that the Void Pit consumes");
+                    player.sendMessage("§e/pit region§b: Configure the region where the Void Pit resides");
+                    player.sendMessage("§e/pit hologram§b: Configure the hologram that displays info about the Void Pit");
+                    player.sendMessage("§e/pit energy§b: Configure the Void Pit's energy settings");
                     player.sendMessage("§e/pit reload§b: Reload this plugin");
                     player.sendMessage("§e/pit help§b: Get help on this command");
                     break;

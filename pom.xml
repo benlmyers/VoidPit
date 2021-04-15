@@ -6,7 +6,7 @@
 
     <groupId>com.characterlim</groupId>
     <artifactId>VoidPit</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>1.0-RELEASE</version>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

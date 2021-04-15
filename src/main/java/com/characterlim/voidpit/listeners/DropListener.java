@@ -6,10 +6,12 @@ import com.characterlim.voidpit.ParticleAnimator;
 import com.characterlim.voidpit.VoidPitPlugin;
 import com.characterlim.voidpit.managers.PitHologramManager;
 import com.sk89q.worldedit.math.BlockVector3;
+import org.bukkit.util.BlockVector;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.regions.Region;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -44,6 +46,15 @@ public class DropListener implements Listener {
             @Override
             public void run() {
                 count[0] = checkDrop(event, this, count[0]);
+                Player player = event.getPlayer();
+                World world = player.getWorld();
+                BlockVector3 v1 = BlockVector3.at(Config.Region.pos1.getX(), Config.Region.pos1.getY(), Config.Region.pos1.getZ());
+                BlockVector3 v2 = BlockVector3.at(Config.Region.pos2.getX(), Config.Region.pos2.getY(), Config.Region.pos2.getZ());
+                Region region = new CuboidRegion((com.sk89q.worldedit.world.World) world, v1, v2);
+                BlockVector3 v = BlockVector3.at(player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ());
+                if(region.contains(v)) {
+                    player.damage(1.0);
+                }
             }
         };
         task.runTaskTimer(plugin, CHECK_DELAY, CHECK_PERIOD);

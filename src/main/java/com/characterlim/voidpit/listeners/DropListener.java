@@ -31,7 +31,7 @@ public class DropListener implements Listener {
 
     private static final long TPS = 20;
     private static final long CHECK_DELAY = 2 * TPS;
-    private static final long CHECK_PERIOD = TPS;
+    private static final long CHECK_PERIOD = 2 * TPS;
     private static final int MAX_CHECKS = 6;
 
     public DropListener(VoidPitPlugin instance) {
@@ -46,15 +46,6 @@ public class DropListener implements Listener {
             @Override
             public void run() {
                 count[0] = checkDrop(event, this, count[0]);
-                Player player = event.getPlayer();
-                World world = player.getWorld();
-                BlockVector3 v1 = BlockVector3.at(Config.Region.pos1.getX(), Config.Region.pos1.getY(), Config.Region.pos1.getZ());
-                BlockVector3 v2 = BlockVector3.at(Config.Region.pos2.getX(), Config.Region.pos2.getY(), Config.Region.pos2.getZ());
-                Region region = new CuboidRegion((com.sk89q.worldedit.world.World) world, v1, v2);
-                BlockVector3 v = BlockVector3.at(player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ());
-                if(region.contains(v)) {
-                    player.damage(1.0);
-                }
             }
         };
         task.runTaskTimer(plugin, CHECK_DELAY, CHECK_PERIOD);
@@ -95,6 +86,7 @@ public class DropListener implements Listener {
             BlockVector3 dropPosition = BlockVector3.at(dropLocation.getBlockX(), dropLocation.getBlockY(), dropLocation.getBlockZ());
             ItemStack stack = event.getItemDrop().getItemStack();
             if(this.pitRegion.contains(dropPosition)) {
+                event.getItemDrop().remove();
                 player.sendMessage("§bYou've sacrificed §9" + stack.getAmount() + "§b items to the Pit!");
                 particleAnimator.animateItemDestroy(dropLocation);
                 particleAnimator.animateAscend(dropLocation, new CompletionHandler() {
@@ -103,7 +95,7 @@ public class DropListener implements Listener {
                         handleParticleFinished(player, stack.getAmount());
                     }
                 });
-                event.getItemDrop().remove();
+                return;
             }
         }
     }

@@ -62,6 +62,7 @@ public class HologramSubcommand implements Subcommand {
 
         commands.add("setposition");
         commands.add("showposition");
+        commands.add("setlabel");
         commands.add("refresh");
         commands.add("setlabel");
         commands.add("help");

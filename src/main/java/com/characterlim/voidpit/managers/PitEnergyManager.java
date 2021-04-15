@@ -24,4 +24,10 @@ public class PitEnergyManager {
         player.sendMessage("§bMax energy set to §9" + amount + "§b.");
         PitHologramManager.refresh();
     }
+
+    public void setEnergy(Player player, int amount) {
+        Config.Energy.energy = amount;
+        Config.Energy.save();
+        player.sendMessage("§bEnergy to set §9" + amount + "§b.");
+    }
 }

@@ -33,6 +33,10 @@ public class EnergySubcommand implements Subcommand {
                     if(args[1] != null)  energyManager.setMaxEnergy(player, Integer.parseInt(args[1]));
                     else player.sendMessage("§bUsage: §e/pit energy setmax <amount>");
                     break;
+                case "set":
+                    if(args[1] != null) energyManager.setEnergy(player, Integer.parseInt(args[1]));
+                    else player.sendMessage("§bUsage: §e/pit energy set <amount>");
+                    break;
                 case "help":
                     assert player != null;
                     player.sendMessage("§e/pit energy setmax§b: Set the maximum energy needed to win");
@@ -49,6 +53,7 @@ public class EnergySubcommand implements Subcommand {
         List<String> commands = new ArrayList<>();
 
         commands.add("setmax");
+        commands.add("set");
         commands.add("help");
 
         StringUtil.copyPartialMatches(arg, commands, completions);

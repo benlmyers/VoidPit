@@ -100,7 +100,11 @@ public class DropListener implements Listener {
     private void handleParticleFinished(Player player, int amount) {
         Config.Energy.energy += amount;
         if(Config.Energy.userEnergy.containsKey(player.getName())) {
-            Config.Energy.userEnergy.put(player.getName(), Config.Energy.userEnergy.get(player.getName()) + amount);
+            try {
+                Config.Energy.userEnergy.put(player.getName(), Config.Energy.userEnergy.get(player.getName()) + amount);
+            } catch(Exception e) {
+                Config.Energy.userEnergy.put(player.getName(), amount);
+            }
         } else {
             Config.Energy.userEnergy.put(player.getName(), amount);
         }

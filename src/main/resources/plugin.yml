@@ -1,6 +1,6 @@
 main: com.characterlim.voidpit.VoidPitPlugin
 name: VoidPit
-version: 0.1
+version: 1.0
 author: characterlim
 description: Toss items into the Void Pit to reach a community goal!
 depend: [WorldEdit,WorldGuard,HolographicDisplays]

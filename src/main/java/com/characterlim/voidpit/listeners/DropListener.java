@@ -102,6 +102,9 @@ public class DropListener implements Listener {
 
     private void handleParticleFinished(Player player, int amount) {
         Config.Energy.energy += amount;
+        if(Config.Energy.energy >= Config.Energy.maxEnergy) {
+            player.sendMessage("§bThe max Energy has been reached! Please wait for the owner to activate the reward.");
+        }
         if(Config.Energy.userEnergy.containsKey(player.getName())) {
             try {
                 Config.Energy.userEnergy.put(player.getName(), Config.Energy.userEnergy.get(player.getName()) + amount);
